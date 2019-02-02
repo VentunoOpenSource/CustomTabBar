@@ -26,13 +26,16 @@ class MenuBar: UIView,UICollectionViewDataSource, UICollectionViewDelegate, UICo
     }()
 
     
+    
+    
     let cellId="cellId"
+    let imageNames = ["home","home","home","home"]
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        collectionView.register(MenuBar.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
 
         
         
@@ -40,6 +43,8 @@ class MenuBar: UIView,UICollectionViewDataSource, UICollectionViewDelegate, UICo
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
+        
+      //  setupViews()
         
     }
     
@@ -65,19 +70,26 @@ class MenuBar: UIView,UICollectionViewDataSource, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         
-       // cell.backgroundColor = UIColor.blue
+        cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
+        cell.tintColor = UIColor.gray
+        
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print ("Width: \(frame.width) Height: \(frame.height)")
         
-        return CGSize(width: frame.width / 4 , height: frame.height)
-    }
+        
+         return CGSize(width: (frame.width/4) , height: frame.height)
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+ 
+   
+    
     
 }

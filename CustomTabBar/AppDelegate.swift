@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Fallback on earlier versions
         }
     }
+    
 
     // MARK: - Core Data stack
 
